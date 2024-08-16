@@ -1,37 +1,29 @@
 #include "autocomplete.h"
-#include <functional>
+#include <iostream>
+#include <algorithm>
 
-Autocompletar::Autocompletar(int cap) : termos(cap) {}
+Autocompletar::Autocompletar(const ListaOrdenada<Termo>& lista, int limite)
+    : termos(lista), k(limite) {}
 
-void Autocompletar::adicionarTermo(const Termo& termo) {
-    termos.inserir(termo);
-}
-
-ListaOrdenada<Termo> Autocompletar::buscarPorPrefixo(const std::string& prefixo) const {
-    ListaOrdenada<Termo> resultados;
-
+void Autocompletar::buscarPorPrefixo(const std::string& prefixo, ListaOrdenada<Termo>& resultados) const {
     for (int i = 0; i < termos.getTamanho(); ++i) {
         const Termo& termo = termos[i];
-        if (termo.getTermo().find(prefixo) == 0) {
+        if (termo.getTermo().find(prefixo) == 0) {  // Verifica se o prefixo corresponde ao início do termo
             resultados.inserir(termo);
         }
     }
-
-    return resultados;
 }
 
-void Autocompletar::ordenarPorPeso() {
-    termos.ordenar([](const Termo& t1, const Termo& t2) {
-        return Termo::compararPeloPeso(t1, t2) < 0;
+void Autocompletar::exibirResultados(const std::string& prefixo) const {
+    ListaOrdenada<Termo> resultados;
+    buscarPorPrefixo(prefixo, resultados);
+    
+    resultados.ordenar([](const Termo& t1, const Termo& t2) {
+        return t1.getPeso() > t2.getPeso();  // Ordena por peso em ordem decrescente
     });
-}
-
-void Autocompletar::ordenarPorPrefixo(int r) {
-    termos.ordenar([r](const Termo& t1, const Termo& t2) {
-        return Termo::compararPeloPrefixo(t1, t2, r) < 0;
-    });
-}
-
-void Autocompletar::imprimir() const {
-    termos.imprimir();
+    
+    int limite = std::min(k, resultados.getTamanho());
+    for (int i = 0; i < limite; ++i) {
+        std::cout << resultados[i] << std::endl;
+    }
 }
