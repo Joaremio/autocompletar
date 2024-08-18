@@ -6,10 +6,10 @@ Autocompletar::Autocompletar(const ListaOrdenada<Termo>& lista, int limite)
     : termos(lista), k(limite) {}
 
 void Autocompletar::buscarPorPrefixo(const std::string& prefixo, ListaOrdenada<Termo>& resultados) const {
-    for (int i = 0; i < termos.getTamanho(); ++i) {
+    for (int i = 0; i < termos.size(); ++i) {
         const Termo& termo = termos[i];
         if (termo.getTermo().find(prefixo) == 0) {  // Verifica se o prefixo corresponde ao início do termo
-            resultados.inserir(termo);
+            resultados.add(termo);
         }
     }
 }
@@ -22,7 +22,7 @@ void Autocompletar::exibirResultados(const std::string& prefixo) const {
         return t1.getPeso() > t2.getPeso();  // Ordena por peso em ordem decrescente
     });
     
-    int limite = std::min(k, resultados.getTamanho());
+    int limite = std::min(k, resultados.size());
     for (int i = 0; i < limite; ++i) {
         std::cout << resultados[i] << std::endl;
     }

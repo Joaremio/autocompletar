@@ -9,59 +9,57 @@ using namespace std;
 template <typename T>
 class Lista {
 protected:
-    T* itens;       // Ponteiro para armazenar os itens da lista
-    int capacidade; // Capacidade atual da lista (quantos elementos ela pode armazenar)
-    int tamanho;    // Número real de elementos na lista
-
+    T* dados;       // Ponteiro para armazenar os itens da lista
+    int contador;    // Número real de elementos na lista
+    int tamanho; // Capacidade atual da lista (quantos elementos ela pode armazenar)
 public:
     Lista();              // Construtor
     ~Lista();             // Destrutor
-
-    void inserir(const T elemento);  // Método para inserir itens na lista
-    int getTamanho() const;       // Método para obter o tamanho da lista
-    void imprimir() const;        // Método para imprimir a lista na tela
+    int size() const;           // Método para obter o tamanho da lista //era tamanho
+    void add(const T elemento);  // Método para inserir itens na lista // inserir
+    void show();       // Método para imprimir a lista na tela //imprimir
     const T& operator[](int i) const; // Sobrecarga do operador [] const
 };
 
 template <typename T>
 Lista<T>::Lista(){
-    tamanho = 0;
-    capacidade = 10;
-    itens = new T[capacidade];
+    contador = 0;
+    tamanho = 10;
+    dados = new T[tamanho];
 }
 
 template <typename T>
 Lista<T>::~Lista() {
-    delete[] itens;
+    delete[] dados;
 }
 
 template <typename T>
-void Lista<T>::inserir(const T elemento) {
-    if (tamanho == capacidade) {
-        capacidade *= 2;
-        T* vnovo = new T[capacidade];
+void Lista<T>::add(const T elemento) {
+    if (contador == tamanho) {
+        tamanho = tamanho*2;
+        T* vnovo = new T[tamanho];
 
-        for (int i = 0; i < tamanho; i++) {
-            vnovo[i] = itens[i];
+        for (int i = 0; i < contador; i++) {
+            vnovo[i] = dados[i];
         }
 
-        delete[] itens;
-        itens = vnovo;
+        delete[] dados;
+        dados = vnovo;
     }
 
-    itens[tamanho] = elemento;
-    tamanho++;
+    dados[contador] = elemento;
+    contador++;
 }
 
 template <typename T>
-int Lista<T>::getTamanho() const {
-    return tamanho;
+int Lista<T>::size()const{
+    return contador;
 }
 
 template <typename T>
-void Lista<T>::imprimir() const {
-    for (int i = 0; i < tamanho; i++) {
-        std::cout << itens[i] << " ";
+void Lista<T>::show() {
+    for (int i = 0; i < contador; i++) {
+        std::cout << dados[i] << " ";
     }
     cout << endl;
 }
@@ -70,10 +68,10 @@ void Lista<T>::imprimir() const {
 template <typename T>
 inline const T &Lista<T>::operator[](int i) const
 {
-    if (i < 0 || i >= tamanho) { //
+    if (i < 0 || i >= contador) { //
         throw std::out_of_range("Índice fora do intervalo!"); // vou apagar isso depois 
     }
-    return itens[i];
+    return dados[i];
 }
 
 template <typename T>
@@ -86,13 +84,13 @@ public:
 };
 
 template <typename T>
-void ListaOrdenada<T>::ordenar(bool (*func_compara)(const T&, const T&)) {
-    sort(this->itens, this->itens + this->tamanho, func_compara);
+void ListaOrdenada<T>::ordenar() {
+    sort(this->dados, this->dados + this->contador);
 }
 
 template <typename T>
-void ListaOrdenada<T>::ordenar() {
-    sort(this->itens, this->itens + this->tamanho);
+void ListaOrdenada<T>::ordenar(bool (*func_compara)(const T&, const T&)) {
+    sort(this->dados, this->dados + this->contador, func_compara);
 }
 
 // Funções de comparação

@@ -25,7 +25,7 @@ void carregarDados(const std::string& nomeArquivo, ListaOrdenada<Termo>& lista) 
 
         int64_t peso = std::stoll(pesoStr);
         Termo termoObj(termo, peso);
-        lista.inserir(termoObj);
+        lista.add(termoObj);
     }
 
     arquivo.close();
@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
         autocomplete.exibirResultados(consulta);
     }
 
-    std::cout << "Olwaaaaaaaaaaww" ;
+    std::cout << "Olwaaaaaaaaaaaaaaaaaaww" ;
 
     return 0;
 }
