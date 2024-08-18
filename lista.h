@@ -76,26 +76,34 @@ inline const T &Lista<T>::operator[](int i) const
     return itens[i];
 }
 
-#include <functional>
-
 template <typename T>
 class ListaOrdenada : public Lista<T> {
 public:
     ListaOrdenada() : Lista<T>() {}
 
-    void ordenar();  // Ordena usando a STL (std::sort)
-    void ordenar(std::function<bool(const T&, const T&)> comp);  // Ordena usando uma função de comparação
+    void ordenar();
+    void ordenar(bool (*func_compara)(const T&, const T&));
 };
 
 template <typename T>
-void ListaOrdenada<T>::ordenar(std::function<bool(const T&, const T&)> comp) {
-    std::sort(this->itens, this->itens + this->tamanho, comp);
-}
-template <typename T>
-void ListaOrdenada<T>::ordenar() {
-    std::sort(this->itens, this->itens + this->tamanho);
+void ListaOrdenada<T>::ordenar(bool (*func_compara)(const T&, const T&)) {
+    sort(this->itens, this->itens + this->tamanho, func_compara);
 }
 
+template <typename T>
+void ListaOrdenada<T>::ordenar() {
+    sort(this->itens, this->itens + this->tamanho);
+}
+
+// Funções de comparação
+
+inline bool compararCrescente(const int& a, const int& b) {
+    return a < b;
+}
+
+inline bool compararDecrescente(const int& a, const int& b) {
+    return a > b;
+}
 
 
 #endif // LISTA_H
