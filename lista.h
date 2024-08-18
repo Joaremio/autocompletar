@@ -15,7 +15,7 @@ public:
     Lista();              // Construtor
     ~Lista();             // Destrutor
 
-    void inserir(const T& item);  // Método para inserir itens na lista
+    void inserir(const T elemento);  // Método para inserir itens na lista
     int getTamanho() const;       // Método para obter o tamanho da lista
     void imprimir() const;        // Método para imprimir a lista na tela
     T& operator[](int index);     // Sobrecarga do operador []
@@ -35,20 +35,20 @@ Lista<T>::~Lista() {
 }
 
 template <typename T>
-void Lista<T>::inserir(const T& item) {
+void Lista<T>::inserir(const T elemento) {
     if (tamanho == capacidade) {
         capacidade *= 2;
-        T* novosItens = new T[capacidade];
+        T* vnovo = new T[capacidade];
 
-        for (int i = 0; i < tamanho; ++i) {
-            novosItens[i] = itens[i];
+        for (int i = 0; i < tamanho; i++) {
+            vnovo[i] = itens[i];
         }
 
         delete[] itens;
-        itens = novosItens;
+        itens = vnovo;
     }
 
-    itens[tamanho] = item;
+    itens[tamanho] = elemento;
     tamanho++;
 }
 
@@ -87,7 +87,7 @@ inline const T &Lista<T>::operator[](int index) const
 template <typename T>
 class ListaOrdenada : public Lista<T> {
 public:
-    ListaOrdenada(int cap = 10) : Lista<T>(cap) {}
+    ListaOrdenada() : Lista<T>() {}
 
     void ordenar();  // Ordena usando a STL (std::sort)
     void ordenar(std::function<bool(const T&, const T&)> comp);  // Ordena usando uma função de comparação
