@@ -4,6 +4,8 @@
 #include <iostream>
 #include <algorithm> // Para std::sort
 
+using namespace std;
+
 template <typename T>
 class Lista {
 protected:
@@ -18,8 +20,7 @@ public:
     void inserir(const T elemento);  // Método para inserir itens na lista
     int getTamanho() const;       // Método para obter o tamanho da lista
     void imprimir() const;        // Método para imprimir a lista na tela
-    T& operator[](int index);     // Sobrecarga do operador []
-    const T& operator[](int index) const; // Sobrecarga do operador [] const
+    const T& operator[](int i) const; // Sobrecarga do operador [] const
 };
 
 template <typename T>
@@ -59,27 +60,20 @@ int Lista<T>::getTamanho() const {
 
 template <typename T>
 void Lista<T>::imprimir() const {
-    for (int i = 0; i < tamanho; ++i) {
+    for (int i = 0; i < tamanho; i++) {
         std::cout << itens[i] << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
 }
 
-template <typename T>
-T& Lista<T>::operator[](int index) {
-    if (index < 0 || index >= tamanho) {
-        throw std::out_of_range("Índice fora do intervalo!");
-    }
-    return itens[index];
-}
 
 template <typename T>
-inline const T &Lista<T>::operator[](int index) const
+inline const T &Lista<T>::operator[](int i) const
 {
-    if (index < 0 || index >= tamanho) {
-        throw std::out_of_range("Índice fora do intervalo!");
+    if (i < 0 || i >= tamanho) { //
+        throw std::out_of_range("Índice fora do intervalo!"); // vou apagar isso depois 
     }
-    return itens[index];
+    return itens[i];
 }
 
 #include <functional>
