@@ -12,7 +12,7 @@ protected:
     int tamanho;    // Número real de elementos na lista
 
 public:
-    Lista(int cap = 10);  // Construtor
+    Lista();              // Construtor
     ~Lista();             // Destrutor
 
     void inserir(const T& item);  // Método para inserir itens na lista
@@ -23,7 +23,9 @@ public:
 };
 
 template <typename T>
-Lista<T>::Lista(int cap) : capacidade(cap), tamanho(0) {
+Lista<T>::Lista(){
+    tamanho = 0;
+    capacidade = 10;
     itens = new T[capacidade];
 }
 
