@@ -4,24 +4,26 @@
 #include <string>
 #include <iostream>
 
+using namespace std;
+
 class Termo {
 private:
-    std::string termo;
+    string termo;
     int peso;
 
 public:
     Termo();
-    Termo(const std::string& termo, int peso);
+    Termo(const string termo_, int peso_);
 
     static int compararPeloPeso(const Termo& t1, const Termo& t2);
     static int compararPeloPrefixo(const Termo& t1, const Termo& t2, int r);
 
     bool operator<(const Termo& t2) const;
 
-    friend std::ostream& operator<<(std::ostream& out, const Termo& t);
+    friend ostream& operator<<(ostream& out, const Termo& t);
 
     // Métodos de acesso
-    const std::string& getTermo() const;
+    const string& getTermo() const;
     int getPeso() const;
 };
 
