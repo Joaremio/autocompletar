@@ -11,7 +11,7 @@ private:
     int k;
 
 public:
-    Autocompletar(const ListaOrdenada<Termo>& lista, int limite);
+    Autocompletar(ListaOrdenada<Termo>& lista, int limite);
 
     void exibirResultados(const std::string& prefixo) const;
 

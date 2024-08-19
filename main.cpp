@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
         autocomplete.exibirResultados(consulta);
     }
 
-    std::cout << "Olwaaaaaaaaaaaaaaaaaaaaaaaaaaaaaww" ;
+    std::cout << "Olwaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaww" ;
 
     return 0;
 }
