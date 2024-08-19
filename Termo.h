@@ -23,8 +23,9 @@ public:
     friend ostream& operator<<(ostream& out, const Termo& t);
 
     // Métodos de acesso
-    const string& getTermo() const;
     int getPeso() const;
+    const string& getTermo() const;
+    
 };
 
 #endif // TERMO_H
