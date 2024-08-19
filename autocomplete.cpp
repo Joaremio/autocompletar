@@ -2,13 +2,18 @@
 #include <iostream>
 #include <algorithm>
 
-Autocompletar::Autocompletar(const ListaOrdenada<Termo>& lista, int limite)
-    : termos(lista), k(limite) {}
-
+Autocompletar::Autocompletar(const ListaOrdenada<Termo>& lista, int limite){
+    termos = lista;
+    k = limite;
+}
 void Autocompletar::buscarPorPrefixo(const std::string& prefixo, ListaOrdenada<Termo>& resultados) const {
     for (int i = 0; i < termos.size(); ++i) {
         const Termo& termo = termos[i];
-        if (termo.getTermo().find(prefixo) == 0) {  // Verifica se o prefixo corresponde ao início do termo
+        // Obtenha o termo completo
+        std::string termoCompleto = termo.getTermo();
+        
+        // Verifica se o prefixo corresponde ao início do termo
+        if (termoCompleto.substr(0, prefixo.length()) == prefixo) {
             resultados.add(termo);
         }
     }
