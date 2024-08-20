@@ -6,30 +6,7 @@
 #include "autocomplete.h"
 #include <iostream>
 #include <string>
-
-// Função para carregar os dados do arquivo e armazená-los na lista
-void carregarDados(const std::string& nomeArquivo, ListaOrdenada<Termo>& lista) {
-    std::ifstream arquivo(nomeArquivo);
-    if (!arquivo.is_open()) {
-        throw std::runtime_error("Não foi possível abrir o arquivo: " + nomeArquivo);
-    }
-
-    std::string linha;
-    while (std::getline(arquivo, linha)) {
-        std::istringstream iss(linha);
-        std::string pesoStr, termo;
-        
-        if (!std::getline(iss, pesoStr, '\t') || !std::getline(iss, termo)) {
-            throw std::runtime_error("Erro ao ler linha do arquivo: " + linha);
-        }
-
-        int64_t peso = std::stoll(pesoStr);
-        Termo termoObj(termo, peso);
-        lista.add(termoObj);
-    }
-
-    arquivo.close();
-}
+#include "read.h"
 
 int main(int argc, char* argv[]) {
     if (argc < 3) {
@@ -61,7 +38,7 @@ int main(int argc, char* argv[]) {
         autocomplete.exibirResultados(consulta);
     }
 
-    std::cout << "Olwaaaaaaaaaaaaaaaaaaaaaaaaaaaaww" ;
+    std::cout << "Olwaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaww" ;
 
     return 0;
 }

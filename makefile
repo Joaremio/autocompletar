@@ -1,5 +1,3 @@
-# Makefile para compilar o projeto
-
 # Nome do executável
 EXEC = programa
 
@@ -7,8 +5,8 @@ EXEC = programa
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall
 
-# Arquivos fonte
-SRCS = main.cpp Termo.cpp autocomplete.cpp
+# Arquivos fonte (adicione utils.cpp e lista.cpp)
+SRCS = main.cpp Termo.cpp autocomplete.cpp read.cpp 
 
 # Arquivos objetos
 OBJS = $(SRCS:.cpp=.o)

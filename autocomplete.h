@@ -5,6 +5,8 @@
 #include "lista.h"
 #include <string>
 
+using namespace std;
+
 class Autocompletar {
 private:
     ListaOrdenada<Termo> termos;
@@ -13,10 +15,10 @@ private:
 public:
     Autocompletar(ListaOrdenada<Termo>& lista, int limite);
 
-    void exibirResultados(const std::string& prefixo) const;
+    void exibirResultados(const string& prefixo) const;
 
 private:
-    void buscarPorPrefixo(const std::string& prefixo, ListaOrdenada<Termo>& resultados) const;
+    void buscarPorPrefixo(const string& prefixo, ListaOrdenada<Termo>& resultados) const;
 };
 
 #endif // AUTOCOMPLETAR_H
