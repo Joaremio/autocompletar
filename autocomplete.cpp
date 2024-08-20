@@ -1,6 +1,6 @@
 #include "autocomplete.h"
 #include <iostream>
-#include <algorithm>
+
 
 Autocompletar::Autocompletar(ListaOrdenada<Termo>& lista_, int maximo) {
     termos = lista_;
@@ -50,13 +50,19 @@ void Autocompletar::exibirResultados(const std::string& prefixo) const {
     ListaOrdenada<Termo> resultados;
     buscarPorPrefixo(prefixo, resultados);
 
-    // Ordena os resultados por peso em ordem decrescente
+    // Ordena os resultados por peso em ordem decrescente usando o método de comparação da classe Termo
     resultados.ordenar([](const Termo& t1, const Termo& t2) {
-        return t1.getPeso() > t2.getPeso();  // Lambda que compara por peso
+        return Termo::compararPeloPeso(t1, t2) > 0;  // Utiliza o método compararPeloPeso para ordenar
     });
 
-    int limite = std::min(k, resultados.size());
-    for (int i = 0; i < limite; ++i) {
+    int maximo;
+
+    if(resultados.size()<k){
+        maximo = resultados.size();
+    }else{
+        maximo = k;
+    }
+    for (int i = 0; i < maximo; ++i) {
         std::cout << resultados[i] << std::endl;
     }
 }
