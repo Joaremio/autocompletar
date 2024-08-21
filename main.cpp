@@ -1,31 +1,39 @@
-#include <fstream>
-#include <sstream>
-#include <stdexcept>
+#include <iostream>
+#include <string>
 #include "Termo.h"
 #include "lista.h"
 #include "autocomplete.h"
-#include <iostream>
-#include <string>
 #include "read.h"
 
-int main(int argc, char* argv[]) {
+void processarEntrada(int argc, char* argv[], std::string& arquivoDados, int& k) {
     if (argc < 3) {
-        std::cerr << "Uso: " << argv[0] << " <arquivo_dados> <k>" << std::endl;
-        return 1;
+        std::cout << "Uso: " << argv[0] << " <arquivo_dados> <k>" << std::endl;
+        exit(1);
     }
+    arquivoDados = argv[1];
+    k = atoi(argv[2]); // Simpler alternative to std::stoi
+}
 
-    std::string arquivoDados = argv[1];
-    int k = std::stoi(argv[2]);
+int main(int argc, char* argv[]) {
+    std::string arquivoDados;
+    int k;
 
+    // Processar argumentos de entrada
+    processarEntrada(argc, argv, arquivoDados, k);
+
+    // Carregar os dados do arquivo na lista
     ListaOrdenada<Termo> lista;
-    carregarDados(arquivoDados, lista);
+    openfile(arquivoDados, lista);
 
+    // Ordenar a lista por termo
     lista.ordenar([](const Termo& t1, const Termo& t2) {
         return t1.getTermo() < t2.getTermo();
     });
 
+    // Criar objeto Autocompletar
     Autocompletar autocomplete(lista, k);
 
+    // Loop de consulta
     std::string consulta;
     while (true) {
         std::cout << "Entre com o termo a ser auto-completado: (digite \"sair\" para encerrar o programa): " << std::endl;
@@ -37,8 +45,6 @@ int main(int argc, char* argv[]) {
 
         autocomplete.exibirResultados(consulta);
     }
-
-    std::cout << "Olwaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaww" ;
 
     return 0;
 }

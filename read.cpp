@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void carregarDados(const string& nomeArquivo, ListaOrdenada<Termo>& lista) {
+void openfile(const string& nomeArquivo, ListaOrdenada<Termo>& lista) {
     ifstream arquivo(nomeArquivo); // abertura
     string line;
     if (!arquivo) { // Verifica o arquivo
