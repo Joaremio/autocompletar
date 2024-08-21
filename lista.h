@@ -33,7 +33,7 @@ Lista<T>::Lista() : contador(0), tamanho(10) {
 
 template <typename T>
 Lista<T>::~Lista() {
-    delete[] dados;
+    
 }
 
 template <typename T>
@@ -89,12 +89,12 @@ public:
 
 template <typename T>
 void ListaOrdenada<T>::ordenar() {
-    sort(this->getDados(), this->getDados() + this->size());
+    std::sort(this->getDados(), this->getDados() + this->size());
 }
 
 template <typename T>
 void ListaOrdenada<T>::ordenar(bool(*func_compara)(const T&, const T&)) {
-    sort(this->getDados(), this->getDados() + this->size(), func_compara);
+    std::sort(this->getDados(), this->getDados() + this->size(), func_compara);
 }
 
 // Funções de comparação
@@ -107,3 +107,4 @@ inline bool compararDecrescente(const int& a, const int& b) {
 }
 
 #endif // LISTA_H
+
