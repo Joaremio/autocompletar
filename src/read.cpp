@@ -7,8 +7,8 @@
 
 using namespace std;
 
-void openfile(const string& nomeArquivo, ListaOrdenada<Termo>& lista) {
-    ifstream arquivo(nomeArquivo); // abertura do arquivo
+void openfile(const string& arquive, ListaOrdenada<Termo>& lista_) {
+    ifstream arquivo(arquive); // abertura do arquivo
     string line;
     if (!arquivo) { // Verifica se o arquivo foi aberto com sucesso
         cerr << "Erro durante abertura do arquivo." << endl;
@@ -28,7 +28,7 @@ void openfile(const string& nomeArquivo, ListaOrdenada<Termo>& lista) {
             // Converte o peso para long
             long peso = stol(peso_); 
             Termo termoOb(termo_, peso); // Cria o objeto Termo
-            lista.add(termoOb); // Adiciona à lista
+            lista_.add(termoOb); // Adiciona à lista
         }
     }
 

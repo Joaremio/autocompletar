@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
 
     // Para a consulta
     while (true) {
-        cout << endl << "Entre com o termo a ser autoo-completado: (digite \"sair\" para encerrar o programa): " << endl;
+        cout << endl << "Entre com o termo a ser auto-completado: (digite \"sair\" para encerrar o programa): " << endl;
         cin  >> pesquisa;
 
         if (pesquisa == "sair") {
