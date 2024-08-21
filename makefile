@@ -1,32 +1,35 @@
 # Nome do executável
-TARGET = autocompletar
-
-# Diretórios
-SRC_DIR = src
-INCLUDE_DIR = include
-BUILD_DIR = build
-BIN_DIR = bin
-
-# Arquivos fonte e objetos
-SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
-OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
+EXEC = bin/autocompletar
 
 # Compilador e flags
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR)
+CXXFLAGS = -std=c++11 -Wall -I./include
 
-# Regra para compilar o executável
-$(BIN_DIR)/$(TARGET): $(OBJECTS)
-	@mkdir -p $(BIN_DIR)
-	$(CXX) $(OBJECTS) -o $@
+# Diretório de origem
+SRCDIR = src
+INCDIR = include
+BINDIR = bin
 
-# Regra para compilar arquivos .cpp em .o
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(BUILD_DIR)
+# Arquivos fonte
+SRCS = $(wildcard $(SRCDIR)/*.cpp)
+# Arquivos objeto
+OBJS = $(SRCS:$(SRCDIR)/%.cpp=$(BINDIR)/%.o)
+
+# Regra principal
+all: $(EXEC)
+
+# Como compilar o executável
+$(EXEC): $(OBJS)
+	@mkdir -p $(BINDIR)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
+
+# Como compilar arquivos objeto
+$(BINDIR)/%.o: $(SRCDIR)/%.cpp
+	@mkdir -p $(BINDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Limpeza dos arquivos gerados
+# Limpar arquivos gerados
 clean:
-	rm -f $(BUILD_DIR)/*.o $(BIN_DIR)/$(TARGET)
+	rm -f $(BINDIR)/*.o $(EXEC)
 
-.PHONY: clean
+.PHONY: all clean
