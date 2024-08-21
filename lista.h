@@ -2,24 +2,24 @@
 #define LISTA_H
 
 #include <iostream>
-#include <algorithm> // Para std::sort
+#include <algorithm> 
 
 using namespace std;
 
 template <typename T>
 class Lista {
 protected:
-    T* dados;       // Ponteiro para armazenar os itens da lista
-    int contador;    // Número real de elementos na lista
-    int tamanho; // Capacidade atual da lista (quantos elementos ela pode armazenar)
+    T* dados;       // Ponteiro para os itens da lista
+    int contador;    // Número de elementos na lista
+    int tamanho; // Capacidade atual da lista
 
 public:
-    Lista();              // Construtor
-    ~Lista();             // Destrutor
-    int size() const;           // Método para obter o tamanho da lista
-    void add(const T& elemento);  // Método para inserir itens na lista
-    void show() const;       // Método para imprimir a lista na tela
-    const T& operator[](int i) const; // Sobrecarga do operador [] const
+    Lista();              
+    ~Lista();             
+    int size() const;           // obter o tamanho da lista
+    void add(const T& elemento);  // inserir itens na lista
+    void show() const;       // imprimir a lista na tela
+    const T& operator[](int i) const; // Sobrecarga do operador [] 
 
     // Método para acessar os dados
     T* getDados() { return dados; }
@@ -97,14 +97,6 @@ void ListaOrdenada<T>::ordenar(bool(*func_compara)(const T&, const T&)) {
     std::sort(this->getDados(), this->getDados() + this->size(), func_compara);
 }
 
-// Funções de comparação
-inline bool compararCrescente(const int& a, const int& b) {
-    return a < b;
-}
-
-inline bool compararDecrescente(const int& a, const int& b) {
-    return a > b;
-}
 
 #endif // LISTA_H
 

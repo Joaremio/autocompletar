@@ -9,11 +9,11 @@ using namespace std;
 class Termo {
 private:
     string termo;
-    int peso;
+    long peso;
 
 public:
     Termo();
-    Termo(const string termo_, int peso_);
+    Termo(const string termo_, long peso_);
 
     static int compararPeloPeso(const Termo& t1, const Termo& t2);
     static int compararPeloPrefixo(const Termo& t1, const Termo& t2, int r);

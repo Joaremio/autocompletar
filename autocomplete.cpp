@@ -9,7 +9,7 @@ Autocompletar::Autocompletar(ListaOrdenada<Termo>& lista_, int maximo) {
     k = maximo;
 }
 
-// Função de comparação para buscar por prefixo
+
 bool compararPorPrefixo(const Termo& termo, const string& prefixo) {
     return termo.getTermo() < prefixo;
 }
@@ -35,11 +35,11 @@ void Autocompletar::buscarPorPrefixo(const string& prefixo, ListaOrdenada<Termo>
     string pref1 = prefixo;
     string pref2 = prefixo + static_cast<char>(prefixo.back() + 1);
 
-    // Acessa os dados usando o método de acesso
+    
     int inicio = buscabinaria(termos.getDados(), termos.size(), pref1, compararPorPrefixo);
     int  fim = buscabinaria(termos.getDados(), termos.size(), pref2, compararPorPrefixo);
 
-    for (int i = inicio; i < fim && i < termos.size(); ++i) {
+    for (int i = inicio; i < fim && i < termos.size(); ++i) { // Acessa os dados usando o método de acesso
         if (termos[i].getTermo().substr(0, prefixo.size()) == prefixo) {
             resultados.add(termos[i]);
         }
@@ -50,12 +50,12 @@ void Autocompletar::exibirResultados(const string& prefixo) const {
     ListaOrdenada<Termo> resultados;
     buscarPorPrefixo(prefixo, resultados);
 
-    // Ordena os resultados por peso em ordem decrescente usando o método de comparação da classe Termo
-    resultados.ordenar([](const Termo& t1, const Termo& t2) {
+    
+    resultados.ordenar([](const Termo& t1, const Termo& t2) { // Ordena os resultados por peso em ordem decrescente 
         return Termo::compararPeloPeso(t1, t2) > 0;  // Utiliza o método compararPeloPeso para ordenar
     });
 
-    int maximo;
+    int maximo; //Verifica se o maximo de termos que deve aparecer
 
     if(resultados.size()<k){
         maximo = resultados.size();

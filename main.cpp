@@ -11,10 +11,9 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
    
-    // Processar argumentos diretamente
     string pesquisa;
     string baseDados = argv[1];
-    int k = atoi(argv[2]); // Simpler alternative to std::stoi
+    int k = atoi(argv[2]);
 
     // Carregar os dados do arquivo na lista
     ListaOrdenada<Termo> lista;
@@ -25,10 +24,9 @@ int main(int argc, char* argv[]) {
         return t1.getTermo() < t2.getTermo();
     });
 
-    // Criar objeto Autocompletar
     Autocompletar autocomplete(lista, k);
 
-    // Loop de consulta
+    // Para a consulta
     while (true) {
         cout << "Entre com o termo a ser auto-completado: (digite \"sair\" para encerrar o programa): " << endl;
         cin  >> pesquisa;
@@ -42,6 +40,7 @@ int main(int argc, char* argv[]) {
     }
     }
 
+  
     
     
     return 0;

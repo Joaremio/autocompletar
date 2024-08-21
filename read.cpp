@@ -2,31 +2,31 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "Termo.h"
 #include "lista.h"
 
 using namespace std;
 
 void openfile(const string& nomeArquivo, ListaOrdenada<Termo>& lista) {
-    ifstream arquivo(nomeArquivo); // abertura
+    ifstream arquivo(nomeArquivo); // abertura do arquivo
     string line;
-    if (!arquivo) { // Verifica o arquivo
-        cerr << "Erro durante abertura do arquivo." << endl; //imprime na tela caso tenha algum erro
-        return; // Sai da função caso haja erro
+    if (!arquivo) { // Verifica se o arquivo foi aberto com sucesso
+        cerr << "Erro durante abertura do arquivo." << endl;
+        return;
     }
 
-    
-    while (getline(arquivo, line)) { // Lê cada linha do arquivo
+    // Ler cada linha do arquivo
+    while (getline(arquivo, line)) { 
         size_t posicao = line.find('\t');
         string termo_;
         string peso_;
         
-         // Encontra a posição da tabulação
-
-        if (posicao != string::npos) { // Se encontrou a tabulação
+        if (posicao != string::npos) { // Se encontrou o separador
             termo_ = line.substr(posicao + 1);  // Extrai o termo
             peso_ = line.substr(0, posicao); // Extrai o peso como string
 
-            int64_t peso = stoll(peso_); // Converte o peso para número
+            // Converte o peso para long
+            long peso = stol(peso_); 
             Termo termoOb(termo_, peso); // Cria o objeto Termo
             lista.add(termoOb); // Adiciona à lista
         }

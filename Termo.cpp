@@ -5,7 +5,7 @@ Termo::Termo(){
     peso = 0;
 } 
 
-Termo::Termo(const string termo_, int peso_){
+Termo::Termo(const string termo_, long peso_){
     termo = termo_;
     peso = peso_;
 } 
@@ -49,4 +49,3 @@ int Termo::getPeso() const {
 const string& Termo::getTermo() const {
     return termo;
 }
-
