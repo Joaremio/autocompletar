@@ -38,7 +38,7 @@ bool Termo::operator<(const Termo& t2) const {
 }
 
 std::ostream& operator<<(std::ostream& out, const Termo& t) {
-    out << "(" << t.peso << ", " << t.termo << ")";
+    out << t.peso << "   " << t.termo ;
     return out;
 }
 

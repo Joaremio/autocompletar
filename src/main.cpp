@@ -10,6 +10,11 @@ using namespace std;
 
 
 int main(int argc, char* argv[]) {
+
+     if (argc != 3) {
+        cerr << "Uso: " << argv[0] << " <caminho_arquivo> <max_resultados>" << endl;
+        return 1;
+    }
    
     string pesquisa;
     string baseDados = argv[1];
@@ -28,7 +33,7 @@ int main(int argc, char* argv[]) {
 
     // Para a consulta
     while (true) {
-        cout << "Entre com o termo a ser auto-completado: (digite \"sair\" para encerrar o programa): " << endl;
+        cout << endl << "Entre com o termo a ser autoo-completado: (digite \"sair\" para encerrar o programa): " << endl;
         cin  >> pesquisa;
 
         if (pesquisa == "sair") {
